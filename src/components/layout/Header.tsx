@@ -211,7 +211,7 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(false)}
           />
           {/* Drawer Panel */}
-          <div className="relative flex flex-col w-4/5 max-w-sm bg-background border-r border-border h-full p-6 z-50 animate-slide-in">
+          <div className="relative flex flex-col w-4/5 max-w-sm bg-white border-r border-border h-full p-6 z-50 animate-slide-in shadow-2xl">
             <div className="flex justify-between items-center mb-8 border-b border-border pb-4">
               <span className="font-serif tracking-widest text-lg font-semibold">AP JEWEL</span>
               <button
