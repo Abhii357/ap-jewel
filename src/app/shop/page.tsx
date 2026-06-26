@@ -29,7 +29,21 @@ function ShopContent() {
   const [priceRange, setPriceRange] = useState(150000); // Max budget filter
 
   // Sync with search parameters on load
+  const setGoldRates = useStore((state) => state.setGoldRates);
+
   useEffect(() => {
+    // Fetch live rates from database
+    fetch("/api/rates")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.rates?.gold) {
+          const g: Record<string, number> = {};
+          data.rates.gold.forEach((r: any) => { g[r.karat] = r.pricePerGram; });
+          setGoldRates(g);
+        }
+      })
+      .catch(console.error);
+
     const search = searchParams.get("search");
     const category = searchParams.get("category");
     const filter = searchParams.get("filter");

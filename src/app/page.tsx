@@ -29,6 +29,7 @@ export default function Home() {
   const wishlist = useStore((state) => state.wishlist);
   const addItemToCart = useStore((state) => state.addItemToCart);
   const toggleWishlist = useStore((state) => state.toggleWishlist);
+  const setGoldRates = useStore((state) => state.setGoldRates);
 
   // Calculator State
   const [calcPurity, setCalcPurity] = useState("22K");
@@ -37,7 +38,17 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    fetch("/api/rates")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.rates?.gold) {
+          const g: Record<string, number> = {};
+          data.rates.gold.forEach((r: any) => { g[r.karat] = r.pricePerGram; });
+          setGoldRates(g);
+        }
+      })
+      .catch(console.error);
+  }, [setGoldRates]);
 
   // Update calculator result when parameters change
   useEffect(() => {
