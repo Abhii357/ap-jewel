@@ -53,8 +53,9 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Mobile Menu Button */}
           <div className="flex items-center md:hidden">
@@ -202,18 +203,20 @@ export default function Header() {
         </div>
       )}
 
+    </header>
+
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 flex md:hidden">
+        <div className="fixed inset-0 z-50 flex md:hidden">
           {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
             onClick={() => setMobileMenuOpen(false)}
           />
           {/* Drawer Panel */}
-          <div className="relative flex flex-col w-4/5 max-w-sm bg-white border-r border-border h-full p-6 z-50 animate-slide-in shadow-2xl">
+          <div className="relative flex flex-col w-4/5 max-w-sm bg-white border-r border-border h-full p-6 z-50 shadow-2xl animate-slide-in">
             <div className="flex justify-between items-center mb-8 border-b border-border pb-4">
-              <span className="font-serif tracking-widest text-lg font-semibold">AP JEWEL</span>
+              <span className="font-serif tracking-widest text-xl font-bold">AP JEWEL</span>
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-charcoal hover:text-gold p-2"
@@ -221,7 +224,7 @@ export default function Header() {
                 <X className="h-6 w-6" />
               </button>
             </div>
-            <nav className="flex flex-col space-y-6 text-sm uppercase tracking-widest font-semibold flex-1">
+            <nav className="flex flex-col space-y-8 text-base uppercase tracking-widest font-bold flex-1 mt-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -262,6 +265,6 @@ export default function Header() {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }
